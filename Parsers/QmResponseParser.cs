@@ -1,0 +1,33 @@
+﻿using F28x_Project.ResponseDTO;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace F28x_Project.Parsers
+{
+    internal static class QmResponseParser
+    {
+        public static QmResponse Parse(string dataLine)
+        {
+            var parts = dataLine.Split(',', 4, StringSplitOptions.TrimEntries);
+
+            return new QmResponse(
+                ReadingValue: parts.Length > 0 ? ParseDouble(parts[0]) : 0,
+                Unit: parts.Length > 1 ? parts[1] : string.Empty,
+                State: parts.Length > 2 ? parts[2] : string.Empty,
+                Attribute: parts.Length > 3 ? parts[3] : string.Empty);
+        }
+
+        private static double ParseDouble(string value)
+        {
+            return double.TryParse(
+                value,
+                System.Globalization.NumberStyles.Float,
+                CultureInfo.InvariantCulture,
+                out var result) ? result : 0;
+        }
+    }
+}
