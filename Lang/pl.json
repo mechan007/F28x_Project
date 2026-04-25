@@ -1,0 +1,12 @@
+﻿{
+  "Menu.File": "Plik",
+  "Menu.Exit": "Wyjście",
+  "Menu.Settings": "Ustawienia",
+  "Menu.Port": "Port",
+  "Menu.Language": "Język",
+  "Menu.DisplayedValues": "Wyświetlane wartości",
+  "Menu.Basic": "Podstawowe",
+  "Menu.Advanced": "Zaawansowane",
+  "State.OpenTC": "Otwarta termopara!",
+  "State.Discharge": "Błąd rozładowania kondensatora!"
+}

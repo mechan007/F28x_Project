@@ -1,0 +1,12 @@
+﻿{
+  "Menu.File": "Datei",
+  "Menu.Exit": "Beenden",
+  "Menu.Settings": "Einstellungen",
+  "Menu.Port": "Port",
+  "Menu.Language": "Sprache",
+  "Menu.DisplayedValues": "Angezeigte Werte",
+  "Menu.Basic": "Einfach",
+  "Menu.Advanced": "Erweitert",
+  "State.OpenTC": "Thermoelement offen!",
+  "State.Discharge": "Entladefehler beim Kondensator!"
+}

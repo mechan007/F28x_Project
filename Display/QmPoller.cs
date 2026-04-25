@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using F28x_Project.ResponseDTO;
+using F28x_Project.Interfaces;
 
 namespace F28x_Project.Display
 {
@@ -15,6 +16,7 @@ namespace F28x_Project.Display
         private readonly Label _unitLabel;
         private readonly Label _stateLabel;
         private readonly System.Windows.Forms.Timer _timer = new() { Interval = 200 };
+        private ILocalizationProvider? _localization;
 
         public QmPoller(
             Communication comunication,
@@ -32,6 +34,13 @@ namespace F28x_Project.Display
 
         public void Start() => _timer.Start();
         public void Stop() => _timer.Stop();
+
+        public void ApplyLocalization(ILocalizationProvider provider)
+        {
+            _localization = provider;
+        }
+
+        private string Translate(string key) => _localization?.Get(key) ?? key;
 
         private void Timer_Tick(object? sender, EventArgs e)
         {
@@ -71,14 +80,14 @@ namespace F28x_Project.Display
             if (response.State is "OPEN_TC")
             {
                 _readingValueLabel.Text = "-----";
-                _stateLabel.Text = "Open thermocouple!";
+                _stateLabel.Text = Translate("State.OpenTC");
                 return;
             }
 
             if (response.State is "DISCHARGE")
             {
                 _readingValueLabel.Text = "-----";
-                _stateLabel.Text = "Discharge error in capacitance!";
+                _stateLabel.Text = Translate("State.Discharge");
                 return;
             }
 

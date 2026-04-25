@@ -1,0 +1,12 @@
+﻿{
+  "Menu.File": "Soubor",
+  "Menu.Exit": "Konec",
+  "Menu.Settings": "Nastavení",
+  "Menu.Port": "Port",
+  "Menu.Language": "Jazyk",
+  "Menu.DisplayedValues": "Zobrazené hodnoty",
+  "Menu.Basic": "Základní",
+  "Menu.Advanced": "Pokročilé",
+  "State.OpenTC": "Otevřený termočlánek!",
+  "State.Discharge": "Chyba vybití kondenzátoru!"
+}

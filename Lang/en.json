@@ -1,0 +1,12 @@
+﻿{
+  "Menu.File": "File",
+  "Menu.Exit": "Exit",
+  "Menu.Settings": "Settings",
+  "Menu.Port": "Port",
+  "Menu.Language": "Language",
+  "Menu.DisplayedValues": "Displayed values",
+  "Menu.Basic": "Basic",
+  "Menu.Advanced": "Advanced",
+  "State.OpenTC": "Open thermocouple!",
+  "State.Discharge": "Discharge error in capacitance!"
+}
