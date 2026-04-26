@@ -9,12 +9,13 @@
   </PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="ScottPlot.WinForms" Version="5.1.58" />
 		<PackageReference Include="System.IO.Ports" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Content Include="Lang\*.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 	

@@ -2,6 +2,11 @@
   "Language.Name": "English",
   "Dialog.ExitTitle": "Exit",
   "Dialog.ExitConfirm": "Do you really want to exit?",
+  "Dialog.DeviceNotFoundTitle": "Invalid device",
+  "Dialog.DeviceNotFound": "Fluke device was not found.",
+  "Error.PortTitle": "Port error",
+  "Error.PortTimeout": "Port {0} is not responding (timeout).",
+  "Error.PortOpen": "Cannot open port:\n{0}",
   "Menu.File": "File",
   "Menu.Exit": "Exit",
   "Menu.Settings": "Settings",
@@ -10,6 +15,9 @@
   "Menu.DisplayedValues": "Displayed values",
   "Menu.Basic": "Basic",
   "Menu.Advanced": "Advanced",
+  "Menu.Graph": "Graph",
+  "Menu.Graph.Scrolling": "Scrolling (60s)",
+  "Menu.Graph.Continuous": "Continuous",
   "State.OpenTC": "Open thermocouple!",
   "State.Discharge": "Discharge error in capacitance!"
 }

@@ -2,6 +2,11 @@
   "Language.Name": "Česky",
   "Dialog.ExitTitle": "Ukončit",
   "Dialog.ExitConfirm": "Opravdu chcete ukončit program?",
+  "Dialog.DeviceNotFoundTitle": "Neplatné zařízení",
+  "Dialog.DeviceNotFound": "Zařízení Fluke nebylo nalezeno.",
+  "Error.PortTitle": "Chyba portu",
+  "Error.PortTimeout": "Port {0} neodpovídá (timeout).",
+  "Error.PortOpen": "Nelze otevřít port:\n{0}",
   "Menu.File": "Soubor",
   "Menu.Exit": "Konec",
   "Menu.Settings": "Nastavení",
@@ -10,6 +15,9 @@
   "Menu.DisplayedValues": "Zobrazené hodnoty",
   "Menu.Basic": "Základní",
   "Menu.Advanced": "Pokročilé",
+  "Menu.Graph": "Graf",
+  "Menu.Graph.Scrolling": "Posuvný (60s)",
+  "Menu.Graph.Continuous": "Průběžný",
   "State.OpenTC": "Otevřený termočlánek!",
   "State.Discharge": "Chyba vybití kondenzátoru!"
 }

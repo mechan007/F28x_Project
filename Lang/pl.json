@@ -2,6 +2,11 @@
   "Language.Name": "Polski",
   "Dialog.ExitTitle": "Wyjście",
   "Dialog.ExitConfirm": "Czy na pewno chcesz zamknąć program?",
+  "Dialog.DeviceNotFoundTitle": "Nieprawidłowe urządzenie",
+  "Dialog.DeviceNotFound": "Nie znaleziono urządzenia Fluke.",
+  "Error.PortTitle": "Błąd portu",
+  "Error.PortTimeout": "Port {0} nie odpowiada (timeout).",
+  "Error.PortOpen": "Nie można otworzyć portu:\n{0}",
   "Menu.File": "Plik",
   "Menu.Exit": "Wyjście",
   "Menu.Settings": "Ustawienia",
@@ -10,6 +15,9 @@
   "Menu.DisplayedValues": "Wyświetlane wartości",
   "Menu.Basic": "Podstawowe",
   "Menu.Advanced": "Zaawansowane",
+  "Menu.Graph": "Wykres",
+  "Menu.Graph.Scrolling": "Przewijany (60s)",
+  "Menu.Graph.Continuous": "Ciągły",
   "State.OpenTC": "Otwarta termopara!",
   "State.Discharge": "Błąd rozładowania kondensatora!"
 }

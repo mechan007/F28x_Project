@@ -1,101 +1,109 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using F28x_Project.Interfaces;
+using F28x_Project.ResponseDTO;
+using ScottPlot.WinForms;
+using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using F28x_Project.ResponseDTO;
-using F28x_Project.Interfaces;
 
 namespace F28x_Project.Display
 {
     internal sealed class QmPoller
     {
-        private readonly Communication _comunication;
+        private readonly Communication _communication;
         private readonly Label _readingValueLabel;
         private readonly Label _unitLabel;
         private readonly Label _stateLabel;
+        private readonly MeasurementGraphRenderer _graphRenderer;
         private readonly System.Windows.Forms.Timer _timer = new() { Interval = 200 };
+        private readonly Stopwatch _stopwatch = new();
         private ILocalizationProvider? _localization;
+        private bool _isPolling;
 
         public QmPoller(
-            Communication comunication,
+            Communication communication,
             Label readingValueLabel,
             Label unitLabel,
-            Label stateLabel)
+            Label stateLabel,
+            FormsPlot formsPlot,
+            GraphMode graphMode)
         {
-            _comunication = comunication;
+            _communication = communication;
             _readingValueLabel = readingValueLabel;
             _unitLabel = unitLabel;
             _stateLabel = stateLabel;
-
+            _graphRenderer = new MeasurementGraphRenderer(formsPlot, graphMode);
             _timer.Tick += Timer_Tick;
         }
 
-        public void Start() => _timer.Start();
-        public void Stop() => _timer.Stop();
-
-        public void ApplyLocalization(ILocalizationProvider provider)
+        public void Start()
         {
-            _localization = provider;
+            _stopwatch.Restart();
+            _graphRenderer.Reset();
+            _timer.Start();
+        }
+
+        public void Stop()
+        {
+            _timer.Stop();
+            _stopwatch.Stop();
+        }
+
+        public void ApplyLocalization(ILocalizationProvider provider) => _localization = provider;
+
+        public void SetGraphMode(GraphMode mode)
+        {
+            _graphRenderer.SetGraphMode(mode);
+            _stopwatch.Restart();
         }
 
         private string Translate(string key) => _localization?.Get(key) ?? key;
 
-        private void Timer_Tick(object? sender, EventArgs e)
+        private async void Timer_Tick(object? sender, EventArgs e)
         {
-            if (!_comunication.QmCommand(out var ack, out var response) || response is null)
+            if (_isPolling)
                 return;
 
-            if (ack != "0")
-                return;
-
-            if (response.State is "OL")
+            _isPolling = true;
+            try
             {
-                _readingValueLabel.Text = "OL  ";
-                _stateLabel.Text = string.Empty;
-                return;
+                var result = await Task.Run(() => _communication.QmCommand());
+
+                if (result is null || result.Ack != "0")
+                    return;
+
+                UpdateDisplay(result.Response);
             }
-
-            if (response.State is "OL_MINUS")
+            finally
             {
-                _readingValueLabel.Text = "-OL  ";
-                _stateLabel.Text = string.Empty;
-                return;
+                _isPolling = false;
             }
+        }
 
-            if (response.State is "BLANK")
+        private void UpdateDisplay(QmResponse response)
+        {
+            switch (response.State)
             {
-                _readingValueLabel.Text = string.Empty;
-                _stateLabel.Text = string.Empty;
-                return;
-            }
-
-            if (response.State is "INVALID")
-            {
-                _readingValueLabel.Text = "-----";
-                return;
-            }
-
-            if (response.State is "OPEN_TC")
-            {
-                _readingValueLabel.Text = "-----";
-                _stateLabel.Text = Translate("State.OpenTC");
-                return;
-            }
-
-            if (response.State is "DISCHARGE")
-            {
-                _readingValueLabel.Text = "-----";
-                _stateLabel.Text = Translate("State.Discharge");
-                return;
+                case "OL": SetDisplay("OL  ", string.Empty, string.Empty); return;
+                case "OL_MINUS": SetDisplay("-OL  ", string.Empty, string.Empty); return;
+                case "BLANK": SetDisplay(string.Empty, string.Empty, string.Empty); return;
+                case "INVALID": SetDisplay("-----", string.Empty, string.Empty); return;
+                case "OPEN_TC": SetDisplay("-----", string.Empty, Translate("State.OpenTC")); return;
+                case "DISCHARGE": SetDisplay("-----", string.Empty, Translate("State.Discharge")); return;
             }
 
             var (scaledValue, displayUnit) = QmFormatter.ScaleReading(response.ReadingValue, response.Unit);
+            var stateText = response.State == "NORMAL" ? string.Empty : response.State;
 
-            _readingValueLabel.Text = QmFormatter.FormatReading(scaledValue);
-            _unitLabel.Text = displayUnit;
-            _stateLabel.Text = response.State == "NORMAL" ? string.Empty : response.State;
+            SetDisplay(QmFormatter.FormatReading(scaledValue), displayUnit, stateText);
+            _graphRenderer.AddPoint(_stopwatch.Elapsed.TotalSeconds, scaledValue);
+        }
+
+        private void SetDisplay(string reading, string unit, string state)
+        {
+            _readingValueLabel.Text = reading;
+            _unitLabel.Text = unit;
+            _stateLabel.Text = state;
         }
     }
 }

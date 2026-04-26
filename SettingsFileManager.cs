@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Text.Json;
 using F28x_Project.Interfaces;
 
@@ -16,37 +14,40 @@ namespace F28x_Project
         {
             public string? Port { get; init; }
             public string? Language { get; init; }
-        }
-
-        public SettingsFileManager()
-        {
-            var fileDirectory = ResolveFileDirectory();
-            _settingsFilePath = Path.Combine(fileDirectory, "settings.json");
-            _current = LoadFromDisk();
+            public GraphMode GraphMode { get; init; } = GraphMode.Scrolling;
         }
 
         public string? Port => _current.Port;
         public string? Language => _current.Language;
+        public GraphMode GraphMode => _current.GraphMode;
+
+        public SettingsFileManager()
+        {
+            _settingsFilePath = Path.Combine(ResolveFileDirectory(), "settings.json");
+            _current = LoadFromDisk();
+        }
 
         public void UpdatePort(string? port)
         {
-            if (string.Equals(_current.Port, port, StringComparison.Ordinal))
-            {
+            if (string.Equals(_current.Port, port, System.StringComparison.Ordinal))
                 return;
-            }
-
             _current = _current with { Port = port };
             SaveToDisk(_current);
         }
 
         public void UpdateLanguage(string? language)
         {
-            if (string.Equals(_current.Language, language, StringComparison.Ordinal))
-            {
+            if (string.Equals(_current.Language, language, System.StringComparison.Ordinal))
                 return;
-            }
-
             _current = _current with { Language = language };
+            SaveToDisk(_current);
+        }
+
+        public void UpdateGraphMode(GraphMode mode)
+        {
+            if (_current.GraphMode == mode)
+                return;
+            _current = _current with { GraphMode = mode };
             SaveToDisk(_current);
         }
 
@@ -54,9 +55,9 @@ namespace F28x_Project
         {
             if (!File.Exists(_settingsFilePath))
             {
-                var data = new SettingsData();
-                SaveToDisk(data);
-                return data;
+                var fresh = new SettingsData();
+                SaveToDisk(fresh);
+                return fresh;
             }
 
             try
@@ -66,9 +67,9 @@ namespace F28x_Project
             }
             catch
             {
-                var data = new SettingsData();
-                SaveToDisk(data);
-                return data;
+                var fresh = new SettingsData();
+                SaveToDisk(fresh);
+                return fresh;
             }
         }
 
@@ -80,18 +81,17 @@ namespace F28x_Project
 
         private static string ResolveFileDirectory()
         {
-            var directory = new DirectoryInfo(AppContext.BaseDirectory);
-
-            while (directory != null)
+#if DEBUG
+            // V debug režimu ukládej vedle .csproj, aby settings přežily rebuild
+            var dir = new DirectoryInfo(AppContext.BaseDirectory);
+            while (dir is not null)
             {
-                if (directory.EnumerateFiles("*.csproj").Any())
-                {
-                    return directory.FullName;
-                }
-
-                directory = directory.Parent;
+                if (dir.GetFiles("*.csproj").Length > 0)
+                    return dir.FullName;
+                dir = dir.Parent;
             }
-
+#endif
+            // Release i fallback — vždy vedle EXE
             return AppContext.BaseDirectory;
         }
     }

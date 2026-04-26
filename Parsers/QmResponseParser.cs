@@ -1,10 +1,5 @@
-﻿using F28x_Project.ResponseDTO;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
+using F28x_Project.ResponseDTO;
 
 namespace F28x_Project.Parsers
 {
@@ -22,12 +17,8 @@ namespace F28x_Project.Parsers
         }
 
         private static double ParseDouble(string value)
-        {
-            return double.TryParse(
-                value,
-                System.Globalization.NumberStyles.Float,
-                CultureInfo.InvariantCulture,
-                out var result) ? result : 0;
-        }
+            => double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out var result)
+                ? result
+                : 0;
     }
 }

@@ -41,6 +41,9 @@ namespace F28x_Project
             displaedVluesToolStripMenuItem = new ToolStripMenuItem();
             basicToolStripMenuItem = new ToolStripMenuItem();
             advancedToolStripMenuItem = new ToolStripMenuItem();
+            graphToolStripMenuItem = new ToolStripMenuItem();
+            scrollingToolStripMenuItem = new ToolStripMenuItem();
+            continuousToolStripMenuItem = new ToolStripMenuItem();
             portToolStripText = new ToolStripTextBox();
             connectButtonToolStripMenuItem = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
@@ -53,6 +56,7 @@ namespace F28x_Project
             stateLabel = new Label();
             unitLabel = new Label();
             readingValueLabel = new Label();
+            formsPlot1 = new ScottPlot.WinForms.FormsPlot();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -82,7 +86,7 @@ namespace F28x_Project
             // 
             // settingsToolStripMenuItem
             // 
-            settingsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { portToolStripMenuItem, languageToolStripMenuItem, displaedVluesToolStripMenuItem });
+            settingsToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { portToolStripMenuItem, languageToolStripMenuItem, displaedVluesToolStripMenuItem, graphToolStripMenuItem });
             settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             settingsToolStripMenuItem.Size = new Size(74, 24);
             settingsToolStripMenuItem.Text = "Settings";
@@ -133,6 +137,29 @@ namespace F28x_Project
             advancedToolStripMenuItem.Size = new Size(144, 24);
             advancedToolStripMenuItem.Text = "Advanced";
             // 
+            // graphToolStripMenuItem
+            // 
+            graphToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { scrollingToolStripMenuItem, continuousToolStripMenuItem });
+            graphToolStripMenuItem.Name = "graphToolStripMenuItem";
+            graphToolStripMenuItem.Size = new Size(180, 24);
+            graphToolStripMenuItem.Text = "Graph";
+            // 
+            // scrollingToolStripMenuItem
+            // 
+            scrollingToolStripMenuItem.Checked = true;
+            scrollingToolStripMenuItem.CheckOnClick = true;
+            scrollingToolStripMenuItem.CheckState = CheckState.Checked;
+            scrollingToolStripMenuItem.Name = "scrollingToolStripMenuItem";
+            scrollingToolStripMenuItem.Size = new Size(172, 24);
+            scrollingToolStripMenuItem.Text = "Scrolling (60s)";
+            // 
+            // continuousToolStripMenuItem
+            // 
+            continuousToolStripMenuItem.CheckOnClick = true;
+            continuousToolStripMenuItem.Name = "continuousToolStripMenuItem";
+            continuousToolStripMenuItem.Size = new Size(172, 24);
+            continuousToolStripMenuItem.Text = "Continuous";
+            // 
             // portToolStripText
             // 
             portToolStripText.Alignment = ToolStripItemAlignment.Right;
@@ -157,7 +184,7 @@ namespace F28x_Project
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { modelToolStripStatusLabel, toolStripStatusLabel2, serialNumberToolStripStatusLabel, versionToolStripStatusLabel, toolStripStatusLabel3 });
-            statusStrip1.Location = new Point(0, 430);
+            statusStrip1.Location = new Point(0, 462);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(384, 31);
             statusStrip1.TabIndex = 1;
@@ -236,9 +263,17 @@ namespace F28x_Project
             readingValueLabel.TabIndex = 0;
             readingValueLabel.TextAlign = ContentAlignment.MiddleRight;
             // 
+            // formsPlot1
+            // 
+            formsPlot1.Location = new Point(0, 236);
+            formsPlot1.Name = "formsPlot1";
+            formsPlot1.Size = new Size(384, 223);
+            formsPlot1.TabIndex = 3;
+            // 
             // Form1
             // 
-            ClientSize = new Size(384, 461);
+            ClientSize = new Size(384, 493);
+            Controls.Add(formsPlot1);
             Controls.Add(groupBox1);
             Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);
@@ -281,5 +316,9 @@ namespace F28x_Project
         private ToolStripMenuItem displaedVluesToolStripMenuItem;
         private ToolStripMenuItem basicToolStripMenuItem;
         private ToolStripMenuItem advancedToolStripMenuItem;
+        private ScottPlot.WinForms.FormsPlot formsPlot1;
+        private ToolStripMenuItem graphToolStripMenuItem;
+        private ToolStripMenuItem scrollingToolStripMenuItem;
+        private ToolStripMenuItem continuousToolStripMenuItem;
     }
 }

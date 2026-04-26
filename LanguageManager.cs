@@ -13,27 +13,25 @@ namespace F28x_Project
     internal sealed class LanguageManager
     {
         private readonly ToolStripComboBox _languagesComboBox;
-        private readonly ISettings _settings;
+        private readonly string? _savedLanguageCode;
+
+        // JSON každého souboru načten právě jednou — fix #9
+        private readonly Dictionary<string, Dictionary<string, string>> _cache = new();
 
         public event Action<ILocalizationProvider>? LanguageChanged;
+        public event Action<string>? LanguageCodeChanged;
 
-        public LanguageManager(ToolStripComboBox languagesComboBox, ISettings settings)
+        public LanguageManager(ToolStripComboBox languagesComboBox, string? savedLanguageCode)
         {
             _languagesComboBox = languagesComboBox;
-            _settings = settings;
-
+            _savedLanguageCode = savedLanguageCode;
             _languagesComboBox.SelectedIndexChanged += LanguagesComboBox_SelectedIndexChanged;
         }
 
         public void Initialize()
         {
             LoadAvailableLanguages();
-
-            var code = _settings.Language ?? ResolveDefaultLanguage();
-
-            if (_settings.Language is null)
-                _settings.UpdateLanguage(code);
-
+            var code = _savedLanguageCode ?? ResolveDefaultLanguage();
             ApplyLanguage(code);
         }
 
@@ -43,25 +41,25 @@ namespace F28x_Project
             if (!Directory.Exists(langDir))
                 return;
 
-            if (!Directory.Exists(langDir))
-                return;
-
             _languagesComboBox.Items.Clear();
+            _cache.Clear();
 
             foreach (var file in Directory.EnumerateFiles(langDir, "*.json").OrderBy(f => f))
             {
                 var code = Path.GetFileNameWithoutExtension(file);
-                string displayName = code;
 
                 try
                 {
                     var json = File.ReadAllText(file);
-                    var dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
-                    displayName = dict?.GetValueOrDefault("Language.Name") ?? code;
+                    var dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json)
+                               ?? new Dictionary<string, string>();
+
+                    _cache[code] = dict;   // uložíme do cache — ApplyLanguage již nečte disk
+
+                    var displayName = dict.GetValueOrDefault("Language.Name") ?? code;
+                    _languagesComboBox.Items.Add(new LanguageItem(code, displayName));
                 }
                 catch { }
-                // každá položka nese kód jako Tag
-                _languagesComboBox.Items.Add(new LanguageItem(code, displayName));
             }
         }
 
@@ -70,71 +68,44 @@ namespace F28x_Project
             if (_languagesComboBox.SelectedItem is not LanguageItem item)
                 return;
 
-            _settings.UpdateLanguage(item.Code);  // uloží "cs", "en"... do settings.json
+            LanguageCodeChanged?.Invoke(item.Code);
             ApplyLanguage(item.Code);
         }
 
         private string ResolveDefaultLanguage()
         {
-            var langDir = Path.Combine(AppContext.BaseDirectory, "Lang");
             var osCode = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
-
-            if (File.Exists(Path.Combine(langDir, $"{osCode}.json")))
-                return osCode;
-
-            return "en";
+            return _cache.ContainsKey(osCode) ? osCode : "en";
         }
 
         private void ApplyLanguage(string code)
         {
-            var langDir = Path.Combine(AppContext.BaseDirectory, "Lang");
-            var filePath = Path.Combine(langDir, $"{code}.json");
-
-            if (!File.Exists(filePath))
+            // fallback na "en" pokud kód není v cache
+            if (!_cache.TryGetValue(code, out var dict))
             {
+                if (!_cache.TryGetValue("en", out dict))
+                    return;
                 code = "en";
-                filePath = Path.Combine(langDir, "en.json");
             }
 
-            if (!File.Exists(filePath))
-                return;
-
-            try
+            _languagesComboBox.SelectedIndexChanged -= LanguagesComboBox_SelectedIndexChanged;
+            foreach (var item in _languagesComboBox.Items.OfType<LanguageItem>())
             {
-                var json = File.ReadAllText(filePath);
-                var dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json)
-                    ?? new Dictionary<string, string>();
-
-                // 1. nastav combobox bez spuštění eventu
-                _languagesComboBox.SelectedIndexChanged -= LanguagesComboBox_SelectedIndexChanged;
-                foreach (var item in _languagesComboBox.Items.OfType<LanguageItem>())
+                if (item.Code == code)
                 {
-                    if (item.Code == code)
-                    {
-                        _languagesComboBox.SelectedItem = item;
-                        break;
-                    }
+                    _languagesComboBox.SelectedItem = item;
+                    break;
                 }
-                _languagesComboBox.SelectedIndexChanged += LanguagesComboBox_SelectedIndexChanged;
-
-                // 2. přelož UI
-                LanguageChanged?.Invoke(new LocalizationProvider(dict));
             }
-            catch { }
+            _languagesComboBox.SelectedIndexChanged += LanguagesComboBox_SelectedIndexChanged;
+
+            LanguageChanged?.Invoke(new LocalizationProvider(dict));
         }
 
-        // pomocná třída — combobox zobrazí DisplayName, kód máme vždy k dispozici
-        private sealed class LanguageItem
+        private sealed class LanguageItem(string code, string displayName)
         {
-            public string Code { get; }
-            public string DisplayName { get; }
-
-            public LanguageItem(string code, string displayName)
-            {
-                Code = code;
-                DisplayName = displayName;
-            }
-
+            public string Code { get; } = code;
+            public string DisplayName { get; } = displayName;
             public override string ToString() => DisplayName;
         }
     }

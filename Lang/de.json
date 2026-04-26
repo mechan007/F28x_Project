@@ -2,6 +2,11 @@
   "Language.Name": "Deutsch",
   "Dialog.ExitTitle": "Beenden",
   "Dialog.ExitConfirm": "Möchten Sie das Programm wirklich beenden?",
+  "Dialog.DeviceNotFoundTitle": "Ungültiges Gerät",
+  "Dialog.DeviceNotFound": "Fluke-Gerät wurde nicht gefunden.",
+  "Error.PortTitle": "Portfehler",
+  "Error.PortTimeout": "Port {0} antwortet nicht (Timeout).",
+  "Error.PortOpen": "Port kann nicht geöffnet werden:\n{0}",
   "Menu.File": "Datei",
   "Menu.Exit": "Beenden",
   "Menu.Settings": "Einstellungen",
@@ -10,6 +15,9 @@
   "Menu.DisplayedValues": "Angezeigte Werte",
   "Menu.Basic": "Einfach",
   "Menu.Advanced": "Erweitert",
+  "Menu.Graph": "Diagramm",
+  "Menu.Graph.Scrolling": "Scrollend (60s)",
+  "Menu.Graph.Continuous": "Fortlaufend",
   "State.OpenTC": "Thermoelement offen!",
   "State.Discharge": "Entladefehler beim Kondensator!"
 }

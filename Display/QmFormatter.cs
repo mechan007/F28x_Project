@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace F28x_Project.Display
 {
@@ -22,19 +18,17 @@ namespace F28x_Project.Display
         }
 
         /// <summary>
-        /// Pro odporové jednotky automaticky přepočítá hodnotu na Ω / kΩ / MΩ.
-        /// Pro ostatní jednotky pouze mapuje název.
+        /// Pro OHM přepočítá na Ω / kΩ / MΩ. Pro ostatní mapuje název přes <see cref="MapUnit"/>.
         /// </summary>
         public static (double Value, string Unit) ScaleReading(double value, string unit)
         {
             if (unit == "OHM")
             {
                 var abs = Math.Abs(value);
-                if (abs >= 1_000_000)
-                    return (value / 1_000_000, "MΩ");
-                if (abs >= 1_000)
-                    return (value / 1_000, "kΩ");
+                if (abs >= 1_000_000) return (value / 1_000_000, "MΩ");
+                if (abs >= 1_000) return (value / 1_000, "kΩ");
                 return (value, "Ω");
+                // "OHM" vstup nikdy nedosáhne MapUnit — větev tam odstraněna (#14)
             }
 
             return (value, MapUnit(unit));
@@ -43,7 +37,6 @@ namespace F28x_Project.Display
         public static string MapUnit(string unit) => unit switch
         {
             "NONE" => string.Empty,
-            "OHM" => "Ω",
             "VAC_PLUS_DC" => "VAC+DC",
             "AAC_PLUS_DC" => "AAC+DC",
             "CEL" => "°C",

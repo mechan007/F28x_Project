@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Windows.Forms;
+using System.Threading;
+using System.Threading.Tasks;
 using F28x_Project.Parsers;
 using F28x_Project.ResponseDTO;
 
@@ -7,138 +8,113 @@ namespace F28x_Project
 {
     internal sealed class Communication
     {
-        private readonly ComPortManager _comPortManager;
-        private readonly ToolStripStatusLabel _modelStatusLabel;
-        private readonly ToolStripStatusLabel _serialStatusLabel;
-        private readonly ToolStripStatusLabel _versionStatusLabel;
-        private string _ackErrMsg = string.Empty;
+        private const int ReadTimeoutMs = 2000;
+        private const int IdCommandTimeoutMs = 3000; // tvrdý strop — ReadTimeout není spolehlivý
+        private const string ExpectedModelPrefix = "Fluke";
 
-        public Communication(
-            ComPortManager comPortManager,
-            ToolStripStatusLabel modelStatusLabel,
-            ToolStripStatusLabel serialStatusLabel,
-            ToolStripStatusLabel versionStatusLabel)
+        private readonly ComPortManager _comPortManager;
+
+        public event EventHandler<IdResult>? DeviceConnected;
+        public event EventHandler? DeviceDisconnected;
+        public event EventHandler? DeviceNotFound;
+
+        public Communication(ComPortManager comPortManager)
         {
             _comPortManager = comPortManager;
-            _modelStatusLabel = modelStatusLabel;
-            _serialStatusLabel = serialStatusLabel;
-            _versionStatusLabel = versionStatusLabel;
-
             _comPortManager.PortOpened += ComPortManager_PortOpened;
             _comPortManager.PortClosed += ComPortManager_PortClosed;
         }
 
-        public string AckErrMsg => _ackErrMsg;
-
         private void ComPortManager_PortOpened(object? sender, EventArgs e)
         {
-            if (IdCommand(out var ack, out var model, out var version, out var serial))
+            using var cts = new CancellationTokenSource(IdCommandTimeoutMs);
+
+            IdResult? result = null;
+            try
             {
-                CmdAck(ack, model, version, serial);
+                var idTask = Task.Run(IdCommand, cts.Token);
+                result = idTask.Wait(IdCommandTimeoutMs) ? idTask.Result : null;
+            }
+            catch { result = null; }
+
+            var isValidDevice = result is not null
+                && result.Model.StartsWith(ExpectedModelPrefix, StringComparison.OrdinalIgnoreCase);
+
+            if (isValidDevice)
+                DeviceConnected?.Invoke(this, result!);
+            else
+            {
+                DeviceNotFound?.Invoke(this, EventArgs.Empty);
+                _comPortManager.Close();
             }
         }
+
         private void ComPortManager_PortClosed(object? sender, EventArgs e)
-        {
-            _modelStatusLabel.Text = string.Empty;
-            _serialStatusLabel.Text = string.Empty;
-            _versionStatusLabel.Text = string.Empty;
-            _ackErrMsg = string.Empty;
-        }
+            => DeviceDisconnected?.Invoke(this, EventArgs.Empty);
 
-        public bool IdCommand(out string ack,
-                              out string model,
-                              out string version,
-                              out string serial)
+        private IdResult? IdCommand()
         {
-            ack = string.Empty;
-            model = string.Empty;
-            version = string.Empty;
-            serial = string.Empty;
-
             try
             {
                 var port = _comPortManager.GetOpenPort();
-                var originalNewLine = port.NewLine;
-
+                var origNewLine = port.NewLine;
+                var origTimeout = port.ReadTimeout;
                 try
                 {
                     port.NewLine = "\r";
+                    port.ReadTimeout = ReadTimeoutMs;
                     port.DiscardInBuffer();
-
                     port.WriteLine("id\r");
 
-                    ack = port.ReadLine().Trim();
-                    var dataLine = port.ReadLine().Trim();
+                    var ack = port.ReadLine().Trim();
+                    if (ack != "0")
+                        return null;
 
+                    var dataLine = port.ReadLine().Trim();
                     var parts = dataLine.Split(',', 3, StringSplitOptions.TrimEntries);
 
-                    if (parts.Length > 0) model = parts[0];
-                    if (parts.Length > 1) version = parts[1];
-                    if (parts.Length > 2) serial = parts[2];
-
-                    return true;
+                    return new IdResult(
+                        Ack: ack,
+                        Model: parts.Length > 0 ? parts[0] : string.Empty,
+                        Version: parts.Length > 1 ? parts[1] : string.Empty,
+                        Serial: parts.Length > 2 ? parts[2] : string.Empty);
                 }
                 finally
                 {
-                    port.NewLine = originalNewLine;
+                    port.NewLine = origNewLine;
+                    port.ReadTimeout = origTimeout;
                 }
             }
-            catch
-            {
-                return false;
-            }
+            catch { return null; }
         }
 
-        public void CmdAck(string ack, string model, string version, string serial)
+        public QmResult? QmCommand()
         {
-            _ackErrMsg = ack switch
-            {
-                "5" => "No data available",
-                "2" => "Execution error",
-                "1" => "Syntax error",
-                "0" => string.Empty,
-                _ => _ackErrMsg
-            };
-
-            if (!string.IsNullOrWhiteSpace(_ackErrMsg))
-            {
-                return;
-            }
-
-            _modelStatusLabel.Text = model;
-            _serialStatusLabel.Text = serial;
-            _versionStatusLabel.Text = version;
-        }
-        public bool QmCommand(out string ack, out QmResponse? response)
-        {
-            ack = string.Empty;
-            response = null;
             try
             {
                 var port = _comPortManager.GetOpenPort();
-                var originalNewLine = port.NewLine;
+                var origNewLine = port.NewLine;
+                var origTimeout = port.ReadTimeout;
                 try
                 {
                     port.NewLine = "\r";
+                    port.ReadTimeout = ReadTimeoutMs;
                     port.DiscardInBuffer();
-
                     port.WriteLine("qm\r");
 
-                    ack = port.ReadLine().Trim();
+                    var ack = port.ReadLine().Trim();
                     var dataLine = port.ReadLine().Trim();
+                    var response = QmResponseParser.Parse(dataLine);
 
-                    response = QmResponseParser.Parse(dataLine);
-                    return true;
+                    return new QmResult(ack, response);
                 }
                 finally
                 {
-                    port.NewLine = originalNewLine;
+                    port.NewLine = origNewLine;
+                    port.ReadTimeout = origTimeout;
                 }
             }
-            catch
-            {
-                return false;
-            }
+            catch { return null; }
         }
     }
 }
