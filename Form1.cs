@@ -12,7 +12,7 @@ namespace F28x_Project
         private readonly LanguageManager _languageManager;
         private readonly Communication _comunication;
         private readonly QmPoller _qmPoller;
-
+        private ILocalizationProvider? _localization;
 
         public Form1()
         {
@@ -51,10 +51,33 @@ namespace F28x_Project
 
             if (basicToolStripMenuItem.Checked)
                 _qmPoller.Start();
+
+
+            exitToolStripMenuItem.Click += ExitToolStripMenuItem_Click;
+        }
+
+        private void ExitToolStripMenuItem_Click(object? sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                _localization?.Get("Dialog.ExitConfirm") ?? "Do you really want to exit?",
+                _localization?.Get("Dialog.ExitTitle") ?? "Exit",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+                Application.Exit();
         }
 
         private void LanguageManager_LanguageChanged(ILocalizationProvider provider)
         {
+            _localization = provider;
+            
+            if (InvokeRequired) 
+            {
+                Invoke(() => LanguageManager_LanguageChanged(provider));
+                return;
+            }
+
             _qmPoller.ApplyLocalization(provider);
 
             fileToolStripMenuItem.Text = provider.Get("Menu.File");

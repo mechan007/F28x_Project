@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -27,7 +28,13 @@ namespace F28x_Project
         public void Initialize()
         {
             LoadAvailableLanguages();
-            ApplyLanguage(_settings.Language ?? "en");
+
+            var code = _settings.Language ?? ResolveDefaultLanguage();
+
+            if (_settings.Language is null)
+                _settings.UpdateLanguage(code);
+
+            ApplyLanguage(code);
         }
 
         private void LoadAvailableLanguages()
@@ -36,31 +43,58 @@ namespace F28x_Project
             if (!Directory.Exists(langDir))
                 return;
 
-            var languages = Directory.EnumerateFiles(langDir, "*.json")
-                .Select(f => Path.GetFileNameWithoutExtension(f))
-                .OrderBy(l => l)
-                .ToArray();
+            if (!Directory.Exists(langDir))
+                return;
 
             _languagesComboBox.Items.Clear();
-            _languagesComboBox.Items.AddRange(languages.Cast<object>().ToArray());
+
+            foreach (var file in Directory.EnumerateFiles(langDir, "*.json").OrderBy(f => f))
+            {
+                var code = Path.GetFileNameWithoutExtension(file);
+                string displayName = code;
+
+                try
+                {
+                    var json = File.ReadAllText(file);
+                    var dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+                    displayName = dict?.GetValueOrDefault("Language.Name") ?? code;
+                }
+                catch { }
+                // každá položka nese kód jako Tag
+                _languagesComboBox.Items.Add(new LanguageItem(code, displayName));
+            }
         }
 
         private void LanguagesComboBox_SelectedIndexChanged(object? sender, EventArgs e)
         {
-            if (_languagesComboBox.SelectedItem is string language)
-            {
-                _settings.UpdateLanguage(language);
-                ApplyLanguage(language);
-            }
+            if (_languagesComboBox.SelectedItem is not LanguageItem item)
+                return;
+
+            _settings.UpdateLanguage(item.Code);  // uloží "cs", "en"... do settings.json
+            ApplyLanguage(item.Code);
         }
 
-        private void ApplyLanguage(string language)
+        private string ResolveDefaultLanguage()
         {
             var langDir = Path.Combine(AppContext.BaseDirectory, "Lang");
-            var filePath = Path.Combine(langDir, $"{language}.json");
+            var osCode = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+
+            if (File.Exists(Path.Combine(langDir, $"{osCode}.json")))
+                return osCode;
+
+            return "en";
+        }
+
+        private void ApplyLanguage(string code)
+        {
+            var langDir = Path.Combine(AppContext.BaseDirectory, "Lang");
+            var filePath = Path.Combine(langDir, $"{code}.json");
 
             if (!File.Exists(filePath))
+            {
+                code = "en";
                 filePath = Path.Combine(langDir, "en.json");
+            }
 
             if (!File.Exists(filePath))
                 return;
@@ -71,17 +105,37 @@ namespace F28x_Project
                 var dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json)
                     ?? new Dictionary<string, string>();
 
-                var provider = new LocalizationProvider(dict);
-                LanguageChanged?.Invoke(provider);
+                // 1. nastav combobox bez spuštění eventu
+                _languagesComboBox.SelectedIndexChanged -= LanguagesComboBox_SelectedIndexChanged;
+                foreach (var item in _languagesComboBox.Items.OfType<LanguageItem>())
+                {
+                    if (item.Code == code)
+                    {
+                        _languagesComboBox.SelectedItem = item;
+                        break;
+                    }
+                }
+                _languagesComboBox.SelectedIndexChanged += LanguagesComboBox_SelectedIndexChanged;
 
-                // vyber v comboboxu
-                if (_languagesComboBox.Items.Contains(language))
-                    _languagesComboBox.SelectedItem = language;
+                // 2. přelož UI
+                LanguageChanged?.Invoke(new LocalizationProvider(dict));
             }
-            catch
+            catch { }
+        }
+
+        // pomocná třída — combobox zobrazí DisplayName, kód máme vždy k dispozici
+        private sealed class LanguageItem
+        {
+            public string Code { get; }
+            public string DisplayName { get; }
+
+            public LanguageItem(string code, string displayName)
             {
-                // při chybě načtení zůstane původní jazyk
+                Code = code;
+                DisplayName = displayName;
             }
+
+            public override string ToString() => DisplayName;
         }
     }
 }

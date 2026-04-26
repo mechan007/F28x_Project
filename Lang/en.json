@@ -1,4 +1,7 @@
 ﻿{
+  "Language.Name": "English",
+  "Dialog.ExitTitle": "Exit",
+  "Dialog.ExitConfirm": "Do you really want to exit?",
   "Menu.File": "File",
   "Menu.Exit": "Exit",
   "Menu.Settings": "Settings",

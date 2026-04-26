@@ -11,6 +11,12 @@
 	<ItemGroup>
 		<PackageReference Include="System.IO.Ports" Version="8.0.0" />
 	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Lang\*.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 	
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

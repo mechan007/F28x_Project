@@ -1,4 +1,7 @@
 ﻿{
+  "Language.Name": "Česky",
+  "Dialog.ExitTitle": "Ukončit",
+  "Dialog.ExitConfirm": "Opravdu chcete ukončit program?",
   "Menu.File": "Soubor",
   "Menu.Exit": "Konec",
   "Menu.Settings": "Nastavení",

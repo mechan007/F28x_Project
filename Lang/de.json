@@ -1,4 +1,7 @@
 ﻿{
+  "Language.Name": "Deutsch",
+  "Dialog.ExitTitle": "Beenden",
+  "Dialog.ExitConfirm": "Möchten Sie das Programm wirklich beenden?",
   "Menu.File": "Datei",
   "Menu.Exit": "Beenden",
   "Menu.Settings": "Einstellungen",

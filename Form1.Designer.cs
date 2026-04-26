@@ -91,7 +91,7 @@ namespace F28x_Project
             // 
             portToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { portsToolStripComboBox });
             portToolStripMenuItem.Name = "portToolStripMenuItem";
-            portToolStripMenuItem.Size = new Size(174, 24);
+            portToolStripMenuItem.Size = new Size(180, 24);
             portToolStripMenuItem.Text = "Port";
             // 
             // portsToolStripComboBox
@@ -103,11 +103,12 @@ namespace F28x_Project
             // 
             languageToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { languagesToolStripComboBox });
             languageToolStripMenuItem.Name = "languageToolStripMenuItem";
-            languageToolStripMenuItem.Size = new Size(174, 24);
+            languageToolStripMenuItem.Size = new Size(180, 24);
             languageToolStripMenuItem.Text = "Language";
             // 
             // languagesToolStripComboBox
             // 
+            languagesToolStripComboBox.Items.AddRange(new object[] { "English", "Česky", "Deutsch", "Polski" });
             languagesToolStripComboBox.Name = "languagesToolStripComboBox";
             languagesToolStripComboBox.Size = new Size(121, 28);
             // 
@@ -115,7 +116,7 @@ namespace F28x_Project
             // 
             displaedVluesToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { basicToolStripMenuItem, advancedToolStripMenuItem });
             displaedVluesToolStripMenuItem.Name = "displaedVluesToolStripMenuItem";
-            displaedVluesToolStripMenuItem.Size = new Size(174, 24);
+            displaedVluesToolStripMenuItem.Size = new Size(180, 24);
             displaedVluesToolStripMenuItem.Text = "Displaed vlues";
             // 
             // basicToolStripMenuItem
@@ -233,7 +234,6 @@ namespace F28x_Project
             readingValueLabel.Name = "readingValueLabel";
             readingValueLabel.Size = new Size(259, 77);
             readingValueLabel.TabIndex = 0;
-            readingValueLabel.Text = "-0,0000";
             readingValueLabel.TextAlign = ContentAlignment.MiddleRight;
             // 
             // Form1
