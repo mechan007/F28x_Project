@@ -10,6 +10,8 @@ namespace F28x_Project.Display
 {
     internal sealed class QmPoller
     {
+        private const int WarmupSkipTicks = 2; // přeskočí prvních ~400ms po připojení
+
         private readonly Communication _communication;
         private readonly Label _readingValueLabel;
         private readonly Label _unitLabel;
@@ -19,6 +21,7 @@ namespace F28x_Project.Display
         private readonly Stopwatch _stopwatch = new();
         private ILocalizationProvider? _localization;
         private bool _isPolling;
+        private int _warmupRemaining;
 
         public QmPoller(
             Communication communication,
@@ -38,6 +41,7 @@ namespace F28x_Project.Display
 
         public void Start()
         {
+            _warmupRemaining = WarmupSkipTicks;
             _stopwatch.Restart();
             _graphRenderer.Reset();
             _timer.Start();
@@ -72,6 +76,13 @@ namespace F28x_Project.Display
                 if (result is null || result.Ack != "0")
                     return;
 
+                if (_warmupRemaining > 0)
+                {
+                    _warmupRemaining--;
+                    UpdateDisplayOnly(result.Response); // zobrazíme, ale do grafu nepíšeme
+                    return;
+                }
+
                 UpdateDisplay(result.Response);
             }
             finally
@@ -97,6 +108,16 @@ namespace F28x_Project.Display
 
             SetDisplay(QmFormatter.FormatReading(scaledValue), displayUnit, stateText);
             _graphRenderer.AddPoint(_stopwatch.Elapsed.TotalSeconds, scaledValue);
+        }
+
+        private void UpdateDisplayOnly(QmResponse response)
+        {
+            if (response.State is "OL" or "OL_MINUS" or "BLANK" or "INVALID" or "OPEN_TC" or "DISCHARGE")
+                return;
+
+            var (scaledValue, displayUnit) = QmFormatter.ScaleReading(response.ReadingValue, response.Unit);
+            var stateText = response.State == "NORMAL" ? string.Empty : response.State;
+            SetDisplay(QmFormatter.FormatReading(scaledValue), displayUnit, stateText);
         }
 
         private void SetDisplay(string reading, string unit, string state)

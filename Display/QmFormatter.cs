@@ -17,6 +17,21 @@ namespace F28x_Project.Display
             return value.ToString("F" + decimalPlaces, CultureInfo.CurrentCulture);
         }
 
+        ///// <summary>
+        ///// Zaokrouhlí hodnotu na stejné rozlišení jako <see cref="FormatReading"/>.
+        ///// Hodnoty pod rozlišením displeje (např. 2E-05 při zobrazení F4) se tak snapnou na 0.
+        ///// </summary>
+        //public static double SnapToDisplayResolution(double value)
+        //{
+        //    if (value == 0) return 0;
+
+        //    var abs = Math.Abs(value);
+        //    var intDigits = Math.Max(1, (int)Math.Floor(Math.Log10(abs)) + 1);
+        //    var decimalPlaces = Math.Max(0, 5 - intDigits);
+
+        //    return Math.Round(value, decimalPlaces);
+        //}
+
         /// <summary>
         /// Pro OHM přepočítá na Ω / kΩ / MΩ. Pro ostatní mapuje název přes <see cref="MapUnit"/>.
         /// </summary>

@@ -30,6 +30,7 @@ namespace F28x_Project
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
@@ -150,14 +151,14 @@ namespace F28x_Project
             scrollingToolStripMenuItem.CheckOnClick = true;
             scrollingToolStripMenuItem.CheckState = CheckState.Checked;
             scrollingToolStripMenuItem.Name = "scrollingToolStripMenuItem";
-            scrollingToolStripMenuItem.Size = new Size(172, 24);
+            scrollingToolStripMenuItem.Size = new Size(180, 24);
             scrollingToolStripMenuItem.Text = "Scrolling (60s)";
             // 
             // continuousToolStripMenuItem
             // 
             continuousToolStripMenuItem.CheckOnClick = true;
             continuousToolStripMenuItem.Name = "continuousToolStripMenuItem";
-            continuousToolStripMenuItem.Size = new Size(172, 24);
+            continuousToolStripMenuItem.Size = new Size(180, 24);
             continuousToolStripMenuItem.Text = "Continuous";
             // 
             // portToolStripText
@@ -166,6 +167,7 @@ namespace F28x_Project
             portToolStripText.BackColor = SystemColors.Window;
             portToolStripText.BorderStyle = BorderStyle.None;
             portToolStripText.Name = "portToolStripText";
+            portToolStripText.ReadOnly = true;
             portToolStripText.Size = new Size(60, 24);
             portToolStripText.Text = "COM99";
             portToolStripText.TextBoxTextAlign = HorizontalAlignment.Center;
@@ -277,8 +279,10 @@ namespace F28x_Project
             Controls.Add(groupBox1);
             Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Name = "Form1";
+            Text = "F28X Toolset";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             statusStrip1.ResumeLayout(false);

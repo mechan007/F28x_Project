@@ -7,6 +7,7 @@ namespace F28x_Project.Display
 {
     internal sealed class MeasurementGraphRenderer
     {
+        private const double MinYSpan = 0.005; // minimální viditelné rozpětí Y osy
         private const double ScrollWindowSeconds = 60.0;
         private const int MaxContinuousPoints = 54_000; // 3 hodiny @ 200 ms
 
@@ -128,8 +129,12 @@ namespace F28x_Project.Display
 
             var yMin = _yValues.Count > 0 ? _yMin : -5;
             var yMax = _yValues.Count > 0 ? _yMax : 5;
-            var yMargin = Math.Abs(yMax - yMin) * 0.1;
-            if (yMargin == 0) yMargin = 1;
+
+            // Zajistí minimální rozpětí — šum pod 0,05 nebude opticky dominovat
+            var midY = (yMin + yMax) / 2.0;
+            var halfSpan = Math.Max((yMax - yMin) / 2.0, MinYSpan / 2.0);
+
+            var yMargin = halfSpan * 0.1;
 
             _formsPlot.Plot.Clear();
             _formsPlot.Plot.Add.ScatterLine(_xValues.ToArray(), _yValues.ToArray());

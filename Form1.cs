@@ -28,9 +28,9 @@ namespace F28x_Project
                 _settings);
 
             _comPortManager.ConnectionStateChanged += (_, connected) =>
-                connectButtonToolStripMenuItem.BackColor = connected
-                    ? Color.LightGreen
-                    : SystemColors.Control;
+               connectButtonToolStripMenuItem.BackColor = connected
+                   ? Color.LightGreen
+                   : SystemColors.Control;
 
             _comPortManager.OpenFailed += ComPortManager_OpenFailed;
 

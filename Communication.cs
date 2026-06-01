@@ -10,7 +10,7 @@ namespace F28x_Project
     {
         private const int ReadTimeoutMs = 2000;
         private const int IdCommandTimeoutMs = 3000; // tvrdý strop — ReadTimeout není spolehlivý
-        private const string ExpectedModelPrefix = "Fluke";
+        private const string ExpectedModelPrefix = "FLUKE";
 
         private readonly ComPortManager _comPortManager;
 
