@@ -1,9 +1,13 @@
-<p align="left">
-  <img src="Img/icon_transparent.png" alt="F28X Toolset logo" width="144" style="vertical-align:middle; margin-right:12px;">
-  <span style="font-size: 2.2rem; font-weight: 700; vertical-align: middle;">
-    F28X Toolset
-  </span>
-</p>
+<table style="border-collapse: collapse; border: none;">
+  <tr>
+    <td style="border: none; vertical-align: middle;">
+      <img src="Img/icon_transparent.png" width="96">
+    </td>
+    <td style="border: none; vertical-align: middle; padding-left: 12px;">
+      <h1 style="margin: 0;">F28X Toolset</h1>
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -54,7 +58,7 @@ V základním režimu vidíš:
 - **základní menu**: Soubor, Nastavení, atd.
 
 <p align="center">
-  <img src="Img/Screenshot/Snímek obrazovky 2026-06-01 140456.png" alt="F28X Toolset – základní rozhraní" width="700">
+  <img src="Img/Screenshot/Snímek obrazovky 2026-06-01 140456.png" alt="F28X Toolset – základní rozhraní" width="300">
 </p>
 
 Text pod screenshotem můžeš použít k vysvětlení, kde co je:
@@ -64,7 +68,7 @@ Text pod screenshotem můžeš použít k vysvětlení, kde co je:
 - **spodní lišta** – informace o přístroji (např. FLUKE 287, S/N, verze)
 
 <p align="center">
-  <img src="Img/Screenshot/Snímek obrazovky 2026-06-01 140627.png" alt="F28X Toolset – graf a menu" width="700">
+  <img src="Img/Screenshot/Snímek obrazovky 2026-06-01 140627.png" alt="F28X Toolset – graf a menu" width="300">
 </p>
 
 ### Nastavení grafu a zobrazených hodnot
@@ -77,7 +81,7 @@ V menu **Nastavení** lze měnit:
 - **Graf** – přepnutí mezi **Posuvný** a **Průběžný**
 
 <p align="center">
-  <img src="Img/Screenshot/Snímek obrazovky 2026-06-01 140539.png" alt="F28X Toolset – nastavení portu, jazyka a grafu" width="700">
+  <img src="Img/Screenshot/Snímek obrazovky 2026-06-01 140539.png" alt="F28X Toolset – nastavení portu, jazyka a grafu" width="300">
 </p>
 
 ---
@@ -96,7 +100,7 @@ Po dokončení bude nabízet navíc:
 Do pokročilého režimu se bude možné přepnout přímo z menu (např. **Zobrazené hodnoty → Pokročilé**).
 
 <p align="center">
-  <img src="Img/Screenshot/Snímek obrazovky 2026-06-01 140555.png" alt="F28X Toolset – pokročilé rozhraní (ve vývoji)" width="700">
+  <img src="Img/Screenshot/Snímek obrazovky 2026-06-01 140555.png" alt="F28X Toolset – pokročilé rozhraní (ve vývoji)" width="300">
 </p>
 
 > ⚠ **Poznámka:** Pokročilé rozhraní je aktuálně ve vývoji a v této verzi není dostupné.
