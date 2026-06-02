@@ -134,4 +134,5 @@ Základní rozhraní je funkční, **pokročilé rozhraní** je zatím **ve výv
 ## Licence
 
 Tento software je chráněn proprietární licencí kterou najdete [ZDE](License.txt).
-Tato licence je platná bez vyjímek pokud autor výslovně neurčí jinak.
+
+**Tato licence je platná bez vyjímek pokud autor výslovně neurčí jinak.**
