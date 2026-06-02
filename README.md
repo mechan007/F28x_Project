@@ -1,5 +1,5 @@
 <p align="left">
-  <img src="icon.png" alt="F28X Toolset logo" width="72" style="vertical-align:middle; margin-right:12px;">
+  <img src="Img/Icon.png" alt="F28X Toolset logo" width="72" style="vertical-align:middle; margin-right:12px;">
   <span style="font-size: 2.2rem; font-weight: 700; vertical-align: middle;">
     F28X Toolset
   </span>
