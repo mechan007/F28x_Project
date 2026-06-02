@@ -75,6 +75,13 @@ V menu **Nastavení** lze měnit:
   <img src="Img/Screenshot/Snímek obrazovky 2026-06-01 140627.png" alt="F28X Toolset – graf a menu" width="300">
 </p>
 
+- **Posuvný** graf posouvá vpřed časovuo osu která má vždy 60sec.
+  - optimální horizontální rozlišení grafu
+  - jen 60ti sekundový časový údaj.
+  
+- **Průběžný** graf má pevnou časovou osu v bodě 0 a dále se přičítá čas  
+  - Celkový časový pohled
+  - s přibývajícím časem se snižuje horizontální rozlišení grafu
 ---
 
 ## Pokročilé rozhraní (WIP)
