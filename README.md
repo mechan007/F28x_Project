@@ -1,15 +1,8 @@
-<table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td style="vertical-align: middle;">
-      <img src="Img/icon_transparent.png" width="96">
-    </td>
-    <td style="vertical-align: middle; padding-left: 12px;">
-      <h1 style="margin: 0;">F28X Toolset</h1>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="Img/Header_transparent144.png" alt="Header and logo">
+</p>
 
----
+
 
 ## Přehled
 
@@ -61,15 +54,13 @@ V základním režimu vidíš:
   <img src="Img/Screenshot/Snímek obrazovky 2026-06-01 140456.png" alt="F28X Toolset – základní rozhraní" width="300">
 </p>
 
-Text pod screenshotem můžeš použít k vysvětlení, kde co je:
+Rozvržení rozhraní:
 
 - **horní část** – aktuální hodnota z multimetru  
 - **střed** – graf průběhu  
 - **spodní lišta** – informace o přístroji (např. FLUKE 287, S/N, verze)
 
-<p align="center">
-  <img src="Img/Screenshot/Snímek obrazovky 2026-06-01 140627.png" alt="F28X Toolset – graf a menu" width="300">
-</p>
+---
 
 ### Nastavení grafu a zobrazených hodnot
 
@@ -81,7 +72,7 @@ V menu **Nastavení** lze měnit:
 - **Graf** – přepnutí mezi **Posuvný** a **Průběžný**
 
 <p align="center">
-  <img src="Img/Screenshot/Snímek obrazovky 2026-06-01 140539.png" alt="F28X Toolset – nastavení portu, jazyka a grafu" width="300">
+  <img src="Img/Screenshot/Snímek obrazovky 2026-06-01 140627.png" alt="F28X Toolset – graf a menu" width="300">
 </p>
 
 ---
@@ -93,8 +84,8 @@ Po dokončení bude nabízet navíc:
 
 - **možnost vracet se v grafu až o 30 minut zpět**
 - **logování hodnot do `.CSV`** pro další analýzu
-- **zobrazení sekundárních hodnot multimetru**
-- **automatické připojení** k multimetru po spuštění
+- **zobrazení sekundárních hodnot z multimetru**
+- volba **automatického připojení** k multimetru po spuštění
 - další pokročilé funkce pro detailní analýzu měření
 
 Do pokročilého režimu se bude možné přepnout přímo z menu (např. **Zobrazené hodnoty → Pokročilé**).
@@ -122,7 +113,7 @@ Do pokročilého režimu se bude možné přepnout přímo z menu (např. **Zobr
 - **Multimetr** kompatibilní s daným protokolem (např. FLUKE 287)  
 - **USB–RS232 převodník**  
 - **Emulovaný COM port** (např. COM3)  
-- OS: Windows (doplníš konkrétní verze)
+- OS: Windows 7, 8, 10, 11(doporučeno)
 
 ---
 
