@@ -1,0 +1,43 @@
+F28X Toolset – Proprietary License
+Copyright (c) 2024–2026 Petr
+
+All rights reserved.
+
+This software and its source code are proprietary and confidential. 
+Unauthorized copying, modification, distribution, or reverse engineering 
+of any part of this software is strictly prohibited.
+
+1. Grant of License
+   You are granted a non-exclusive, non-transferable license to install 
+   and use the Free version of the F28X Toolset for personal or 
+   non-commercial purposes. The Pro version may be used only with a 
+   valid purchased license key.
+
+2. Restrictions
+   - You may not modify, decompile, disassemble, or reverse engineer 
+     any part of the software.
+   - You may not redistribute, sell, rent, lease, sublicense, or 
+     otherwise transfer the software or any portion of it.
+   - You may not attempt to bypass, remove, or alter license protection 
+     mechanisms or access Pro features without a valid license key.
+
+3. Ownership
+   All intellectual property rights, including but not limited to 
+   source code, binaries, design, UI, communication protocols, and 
+   documentation, remain the exclusive property of the author.
+
+4. Warranty Disclaimer
+   This software is provided "as is" without warranty of any kind, 
+   express or implied. The author is not liable for any damages arising 
+   from the use or inability to use this software.
+
+5. Updates and License Validation
+   The software may periodically validate the license key online. 
+   The author reserves the right to revoke licenses obtained fraudulently 
+   or used in violation of this agreement.
+
+6. Termination
+   Any violation of this license will result in immediate termination 
+   of your rights to use the software.
+
+For licensing inquiries or commercial use, contact the author.
