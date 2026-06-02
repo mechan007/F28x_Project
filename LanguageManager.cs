@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Windows.Forms;
-using F28x_Project.Interfaces;
-using F28x_Project.Localization;
+using F28X_Toolset.Interfaces;
+using F28X_Toolset.Localization;
 
-namespace F28x_Project
+namespace F28X_Toolset
 {
     internal sealed class LanguageManager
     {

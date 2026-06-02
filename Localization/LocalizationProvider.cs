@@ -1,7 +1,7 @@
-﻿using F28x_Project.Interfaces;
+﻿using F28X_Toolset.Interfaces;
 using System.Collections.Generic;
 
-namespace F28x_Project.Localization
+namespace F28X_Toolset.Localization
 {
     internal sealed class LocalizationProvider : ILocalizationProvider
     {

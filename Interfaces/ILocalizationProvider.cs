@@ -1,4 +1,4 @@
-﻿namespace F28x_Project.Interfaces
+﻿namespace F28X_Toolset.Interfaces
 {
     internal interface ILocalizationProvider
     {

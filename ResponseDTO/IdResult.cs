@@ -1,4 +1,4 @@
-﻿namespace F28x_Project.ResponseDTO
+﻿namespace F28X_Toolset.ResponseDTO
 {
     internal sealed record IdResult(
         string Ack,

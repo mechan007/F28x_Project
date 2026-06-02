@@ -5,9 +5,9 @@ using System.IO.Ports;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using F28x_Project.Interfaces;
+using F28X_Toolset.Interfaces;
 
-namespace F28x_Project
+namespace F28X_Toolset
 {
     internal sealed class ComPortManager : IDisposable
     {

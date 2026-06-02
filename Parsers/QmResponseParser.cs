@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
-using F28x_Project.ResponseDTO;
+using F28X_Toolset.ResponseDTO;
 
-namespace F28x_Project.Parsers
+namespace F28X_Toolset.Parsers
 {
     internal static class QmResponseParser
     {

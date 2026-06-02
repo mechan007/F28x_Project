@@ -1,4 +1,4 @@
-namespace F28x_Project
+namespace F28X_Toolset
 {
     internal enum PortOpenError { Timeout, OpenFailed }
 

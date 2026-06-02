@@ -1,12 +1,12 @@
-﻿using F28x_Project.Interfaces;
-using F28x_Project.ResponseDTO;
+﻿using F28X_Toolset.Interfaces;
+using F28X_Toolset.ResponseDTO;
 using ScottPlot.WinForms;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace F28x_Project.Display
+namespace F28X_Toolset.Display
 {
     internal sealed class QmPoller
     {

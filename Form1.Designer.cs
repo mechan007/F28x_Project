@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace F28x_Project
+namespace F28X_Toolset
 {
     partial class Form1
     {

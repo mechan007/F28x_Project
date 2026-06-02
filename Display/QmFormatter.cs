@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace F28x_Project.Display
+namespace F28X_Toolset.Display
 {
     internal static class QmFormatter
     {

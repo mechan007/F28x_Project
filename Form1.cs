@@ -1,10 +1,10 @@
 using System;
 using System.Windows.Forms;
-using F28x_Project.Display;
-using F28x_Project.Interfaces;
-using F28x_Project.ResponseDTO;
+using F28X_Toolset.Display;
+using F28X_Toolset.Interfaces;
+using F28X_Toolset.ResponseDTO;
 
-namespace F28x_Project
+namespace F28X_Toolset
 {
     public partial class Form1 : Form
     {

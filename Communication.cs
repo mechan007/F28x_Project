@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using F28x_Project.Parsers;
-using F28x_Project.ResponseDTO;
+using F28X_Toolset.Parsers;
+using F28X_Toolset.ResponseDTO;
 
-namespace F28x_Project
+namespace F28X_Toolset
 {
     internal sealed class Communication
     {

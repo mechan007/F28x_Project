@@ -1,9 +1,9 @@
-﻿using F28x_Project.Interfaces;
+﻿using F28X_Toolset.Interfaces;
 using ScottPlot.WinForms;
 using System;
 using System.Collections.Generic;
 
-namespace F28x_Project.Display
+namespace F28X_Toolset.Display
 {
     internal sealed class MeasurementGraphRenderer
     {

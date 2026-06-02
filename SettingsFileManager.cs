@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Text.Json;
-using F28x_Project.Interfaces;
+using F28X_Toolset.Interfaces;
 
-namespace F28x_Project
+namespace F28X_Toolset
 {
     internal sealed class SettingsFileManager : ISettings
     {
