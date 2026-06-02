@@ -135,4 +135,5 @@ Základní rozhraní je funkční, **pokročilé rozhraní** je zatím **ve výv
 
 ## Licence
 
-(Doplníš např. MIT / GPL / jinou licenci)
+Tento software je chráněn proprietární licencí kterou najdete [ZDE](License.txt).
+Tato licence je platná bez vyjímek pokud autor výslovně neurčí jinak.
