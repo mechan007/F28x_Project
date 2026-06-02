@@ -120,7 +120,7 @@ Do pokročilého režimu se bude možné přepnout přímo z menu (např. **Zobr
 - **Multimetr** kompatibilní s daným protokolem (např. FLUKE 287)  
 - **USB–RS232 převodník**  
 - **Emulovaný COM port** (např. COM3)  
-- OS: Windows 7, 8, 10, 11(doporučeno)
+- OS: Windows 11, 10(> 1607 build), nižší řady nejsou podporovány
 
 ---
 
