@@ -1,6 +1,6 @@
 <p align="left">
-  <img src="Img/Icon.png" alt="F28X Toolset logo" width="72" style="vertical-align:middle; margin-right:12px;">
-  <span style="font-size: 2.2rem; font-weight: 700; vertical-align: middle;">
+  <img src="Img/icon_transparent.png" alt="F28X Toolset logo" width="72" style="vertical-align:middle; margin-right:12px;">
+  <span style="font-size: 3.2rem; font-weight: 700; vertical-align: middle;">
     F28X Toolset
   </span>
 </p>
@@ -54,7 +54,7 @@ V základním režimu vidíš:
 - **základní menu**: Soubor, Nastavení, atd.
 
 <p align="center">
-  <img src="screenshots/basic-ui-1.png" alt="F28X Toolset – základní rozhraní" width="700">
+  <img src="Img/Screenshot/basic-ui-1.png" alt="F28X Toolset – základní rozhraní" width="700">
 </p>
 
 Text pod screenshotem můžeš použít k vysvětlení, kde co je:
@@ -64,7 +64,7 @@ Text pod screenshotem můžeš použít k vysvětlení, kde co je:
 - **spodní lišta** – informace o přístroji (např. FLUKE 287, S/N, verze)
 
 <p align="center">
-  <img src="screenshots/basic-ui-2.png" alt="F28X Toolset – graf a menu" width="700">
+  <img src="Img/Screenshot/basic-ui-2.png" alt="F28X Toolset – graf a menu" width="700">
 </p>
 
 ### Nastavení grafu a zobrazených hodnot
@@ -77,7 +77,7 @@ V menu **Nastavení** lze měnit:
 - **Graf** – přepnutí mezi **Posuvný** a **Průběžný**
 
 <p align="center">
-  <img src="screenshots/menu-settings.png" alt="F28X Toolset – nastavení portu, jazyka a grafu" width="700">
+  <img src="Img/Screenshot/menu-settings.png" alt="F28X Toolset – nastavení portu, jazyka a grafu" width="700">
 </p>
 
 ---
@@ -96,7 +96,7 @@ Po dokončení bude nabízet navíc:
 Do pokročilého režimu se bude možné přepnout přímo z menu (např. **Zobrazené hodnoty → Pokročilé**).
 
 <p align="center">
-  <img src="screenshots/advanced-ui-placeholder.png" alt="F28X Toolset – pokročilé rozhraní (ve vývoji)" width="700">
+  <img src="Img/Screenshot/advanced-ui-placeholder.png" alt="F28X Toolset – pokročilé rozhraní (ve vývoji)" width="700">
 </p>
 
 > ⚠ **Poznámka:** Pokročilé rozhraní je aktuálně ve vývoji a v této verzi není dostupné.
