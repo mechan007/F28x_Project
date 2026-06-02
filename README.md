@@ -1,9 +1,9 @@
-<table style="border-collapse: collapse; border: none;">
+<table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td style="border: none; vertical-align: middle;">
+    <td style="vertical-align: middle;">
       <img src="Img/icon_transparent.png" width="96">
     </td>
-    <td style="border: none; vertical-align: middle; padding-left: 12px;">
+    <td style="vertical-align: middle; padding-left: 12px;">
       <h1 style="margin: 0;">F28X Toolset</h1>
     </td>
   </tr>
