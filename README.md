@@ -6,8 +6,8 @@
 
 ## Přehled
 
-**F28X Toolset** je desktopová aplikace pro **zobrazení měřených hodnot z multimetru na monitoru PC v reálném čase**.  
-Připojuje se pomocí **USB–RS232 převodníku** na **emulovaný COM port** a umožňuje:
+**F28X Toolset** je desktopová aplikace pro **zobrazení měřených hodnot z multimetru FLUKE 289 nebo 287 na monitoru PC v reálném čase**.  
+Připojuje se pomocí **"USB–IR" kabelu** na **emulovaný COM port** a umožňuje:
 
 - **živé čtení hodnot** z multimetru
 - **vykreslování průběhu do grafu**
@@ -27,7 +27,7 @@ Připojuje se pomocí **USB–RS232 převodníku** na **emulovaný COM port** a 
   - **Posuvný graf** – okno v čase, které se posouvá spolu s měřením
 
 - **Připojení přes COM port:**  
-  Připojení probíhá přes **USB–RS232 kabel** na **emulovaný COM port** (např. COM3).
+  Připojení probíhá přes **"USB–IR" kabelu** na **emulovaný COM port**.
 
 - **Vícejazyčné rozhraní:**  
   Aktuálně dostupné jazyky:
