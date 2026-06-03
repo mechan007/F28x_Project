@@ -1,10 +1,12 @@
-<p align="center">
-  <img src="Img/Header_transparent144.png" alt="Header and logo">
-</p>
-<p align="right">
+
+<p align="left">
   <a href="README.cs.md">🇨🇿 Čeština</a> | 
   <a href="README.md">🇬🇧 English</a>
 </p>
+<p align="center">
+  <img src="Img/Header_transparent144.png" alt="Header and logo">
+</p>
+
 
 
 ## Přehled
