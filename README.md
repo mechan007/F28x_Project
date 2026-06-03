@@ -1,7 +1,10 @@
 <p align="center">
   <img src="Img/Header_transparent144.png" alt="Header and logo">
 </p>
-
+<p align="right">
+  <a href="README.cs.md">🇨🇿 Čeština</a> | 
+  <a href="README.md">🇬🇧 English</a>
+</p>
 
 
 ## Přehled
@@ -27,7 +30,7 @@ Připojuje se pomocí **"USB–IR" kabelu** na **emulovaný COM port** a umožň
   - **Posuvný graf** – okno v čase, které se posouvá spolu s měřením
 
 - **Připojení přes COM port:**  
-  Připojení probíhá přes **"USB–IR" kabelu** na **emulovaný COM port**.
+  Připojení probíhá přes **"USB–IR" kabel** na **emulovaný COM port**.
 
 - **Vícejazyčné rozhraní:**  
   Aktuálně dostupné jazyky:
