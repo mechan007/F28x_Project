@@ -121,7 +121,7 @@ It will be possible to switch to advanced mode directly from the menu (e.g. **Di
 
 ## Connections and requirements
 
-- **Multimeter** compatible with the given protocol (e.g. FLUKE 287)
+- **Multimeter** compatible with the given protocol (IR → RS232)
 - **USB-RS232 converter**
 - **Emulated COM port** (e.g. COM3)
 - OS: Windows 11, 10(> 1607 build), lower series are not supported
