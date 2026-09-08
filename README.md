@@ -39,7 +39,7 @@ Currently available languages:
 - Czech
 - German
 - Polish
-More languages ​​will be added gradually.
+- More languages ​​will be added gradually.
 
 ---
 
