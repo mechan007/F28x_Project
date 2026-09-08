@@ -1,6 +1,7 @@
 ﻿<p align="left">
   <a href="README.cs.md">🇨🇿 Čeština</a> | 
-  <a href="README.md">🇬🇧 English</a>
+  <a href="README.md">🇬🇧 English</a> |
+  <a href="https://www.dropbox.com/scl/fo/6m9on0uycvt6uyy3aqs0w/AL-TvyEkRLFnaxJV_Autdkk?rlkey=h27l7xsx6jl7vxul3ql1kjf9p&st=lu49vylb&dl=0">Stažení spustitelné APP (portable)</a>
 </p>
 <p align="center">
   <img src="Img/Header_transparent144.png" alt="Header and logo">
