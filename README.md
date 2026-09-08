@@ -1,7 +1,7 @@
 <p align="left">
   <a href="README.cs.md">🇨🇿 Čeština</a> | 
   <a href="README.md">🇬🇧 English</a>
-</p>
+
 <p align="right">
   <a href="https://www.dropbox.com/scl/fo/6m9on0uycvt6uyy3aqs0w/AL-TvyEkRLFnaxJV_Autdkk?rlkey=h27l7xsx6jl7vxul3ql1kjf9p&st=lu49vylb&dl=0">Download an executable APP (portable)</a>
   </p>
