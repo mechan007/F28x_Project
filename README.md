@@ -49,7 +49,7 @@ Currently available languages:
 
 In basic mode you see:
 
-- **current measured value** (e.g. VDC)
+- **measured value** (e.g. VDC)
 - **Graph over time**
 - **information about the connected port** (e.g. COM3)
 - **basic menu**: File, Settings, etc.
